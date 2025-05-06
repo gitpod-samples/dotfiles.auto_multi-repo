@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-code -r $GITPOD_REPO_ROOT/*.code-workspace
+( 	if grep -q 'supervisor' /proc/1/cmdline; then {
+		gp ports await 23000 1>/dev/null;
+    code -r $GITPOD_REPO_ROOT/*.code-workspace
+	} fi
+) & disown
