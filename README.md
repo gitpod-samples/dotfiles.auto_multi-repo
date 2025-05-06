@@ -11,6 +11,6 @@ This is a hack to auto open the available .code-workspace file in VS Code Web or
 
 ## Customization
 
-You can create an user variable in your Gitpod preferences to specify a fixed .code-workspace file, right now it's auto detected and it will pick the first one in order if there are multiple ones present.
+You can create a user variable in your Gitpod preferences to specify a fixed .code-workspace file, right now it's auto detected and it will pick the first one in order if there are multiple ones present.
 
 For example, you may create a variable called `DOTFILES_CODE_WORKSPACE` with the scope of `*/*` and `foo.code-workspace` as the value.
