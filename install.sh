@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-set -eux
-
-function add_folder_path() {
-	printf '\t\t{ "path": "%s" },\n' "${1}"
-}
 
 function main() {
+	set -eu
+
+	function add_folder_path() {
+		printf '\t\t{ "path": "%s" },\n' "${1}"
+	}
+
 	# Configure your addtional repos here
 	local additional_repos=(
 		"https://github.com/axonasif/test"

@@ -26,8 +26,21 @@ When you start a new Gitpod workspace, the `install.sh` script:
 4. Copy your forked repo link and set it as **Dotfiles - Repository URL** and click on `Save`.
 5. Create new workspace to see in action.
 
-## Customization
+## Embedding the same functionality in your org-wide default workspace/docker image
 
-You can create a user variable in your Gitpod preferences to specify a fixed .code-workspace file, right now it's auto detected and it will pick the first one in order if there are multiple ones present.
+Add the following lines to the source dockerfile used to build your image:
 
-For example, you may create a variable called `DOTFILES_CODE_WORKSPACE` with the scope of `*/*` and `foo.code-workspace` as the value.
+```dockerfile
+RUN <<EOR
+
+multi_repo_script="$(curl -sL https://raw.githubusercontent.com/gitpod-samples/dotfiles.auto_multi-repo/060b413e1bf623bb15c7791032cdd860c54b2d00/install.sh | tail -n +2) &"
+sudo tee -a /etc/bash.bashrc <<BASH
+
+if mkdir /tmp/.multi-repo.lock 2>/dev/null; then
+    $multi_repo_script
+fi
+
+BASH
+
+EOR
+```
