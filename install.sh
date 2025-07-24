@@ -32,6 +32,7 @@ function main() {
 
 		printf '%s\n' \
 			'	],' \
+			'	"settings": { "extensions": { "recommendations": [ "PKief.material-icon-theme" ] } }' \
 		'}'
 	)"
 
