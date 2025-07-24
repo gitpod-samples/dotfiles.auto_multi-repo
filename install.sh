@@ -2,7 +2,7 @@
 set -eux
 
 function add_folder_path() {
-	printf '{ "path": "%s" },\n' "${1}"
+	printf '\t\t{ "path": "%s" },\n' "${1}"
 }
 
 function main() {
@@ -19,17 +19,19 @@ function main() {
 	local code_ws; code_ws="$(
 		printf '%s\n' \
 		'{' \
-			'"folders": ['
+			'	"folders": ['
 
 		add_folder_path "${repo_root}"
 		for repo_url in "${additional_repos[@]}"; do {
-			local repo_clone_path="${workspaces_root}/${repo##*/}"
-			git clone --depth 1 "${repo_url}" "${repo_clone_path}" 1>&2
+			local repo_clone_path="${workspaces_root}/${repo_url##*/}"
+			if test ! -e "${repo_clone_path}/.git"; then {
+				git clone --depth 1 "${repo_url}" "${repo_clone_path}" 1>&2
+			} fi
 			add_folder_path "${repo_clone_path}"
 		} done
 
 		printf '%s\n' \
-			'],' \
+			'	],' \
 		'}'
 	)"
 
