@@ -28,7 +28,9 @@ When you start a new Gitpod workspace, the `install.sh` script:
 
 ## Embedding the same functionality in your org-wide default workspace/docker image
 
-Add the following lines to the source dockerfile used to build your image:
+If you don't want to tell users to configure this individually via dotfiles, you can add this to your org default [workspace image](https://www.gitpod.io/docs/classic/user/configure/orgs/settings#default-workspace-image)
+
+You need to add the following lines to the source dockerfile used to build your image:
 
 ```dockerfile
 RUN <<EOR
